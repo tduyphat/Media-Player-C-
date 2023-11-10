@@ -1,4 +1,6 @@
-namespace MediaPlayer.Core.src.Entities;
+namespace MediaPlayer.Core.src.Entities.PlaylistEntities;
+
+using MediaPlayer.Core.src.Entities.MediaEntities;
 
 public class MediaInPlaylist : Media
 {

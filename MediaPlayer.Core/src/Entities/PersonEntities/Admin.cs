@@ -1,4 +1,4 @@
-namespace MediaPlayer.Core.src.Entities;
+namespace MediaPlayer.Core.src.Entities.PersonEntities;
 
 public class Admin : Person
 {

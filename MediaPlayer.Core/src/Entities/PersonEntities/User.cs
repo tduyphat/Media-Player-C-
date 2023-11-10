@@ -1,4 +1,6 @@
-namespace MediaPlayer.Core.src.Entities;
+namespace MediaPlayer.Core.src.Entities.PersonEntities;
+
+using MediaPlayer.Core.src.Entities.PlaylistEntities;
 
 public class User : Person
 {
