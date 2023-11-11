@@ -2,7 +2,7 @@ namespace MediaPlayer.Core.src.Entities.PersonEntities;
 
 public class Person
 {
-    protected static int _id;
+    protected static int _id = 1;
     protected string _name;
 
     public int ID { get; }

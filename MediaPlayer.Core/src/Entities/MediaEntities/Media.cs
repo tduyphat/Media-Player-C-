@@ -2,7 +2,7 @@ namespace MediaPlayer.Core.src.Entities.MediaEntities;
 
 public class Media
 {
-    protected static int _id;
+    protected static int _id = 1;
     protected string _title;
     protected int _duration;
 
