@@ -55,4 +55,54 @@ public class MediaPlayerService: IMediaPlayerService
   {
     _repo.UpdateVideo(id, title);
   }
+
+  public void AddUser(string name)
+  {
+    _repo.AddUser(name);
+  }
+
+  public void AddAdmin(string name)
+  {
+    _repo.AddUser(name);
+  }
+
+  public void RemovePerson(int id)
+  {
+    _repo.RemovePerson(id);
+  }
+
+  public void UpdatePerson(int id, string name)
+  {
+    _repo.UpdatePerson(id, name);
+  }
+
+  public void GetAllPlaylists()
+  {
+    _repo.GetAllPlaylists();
+  }
+
+  public void GetAllMediaInPlaylist(int id)
+  {
+    _repo.GetAllMediaInPlaylist(id);
+  }
+
+  public void CreatePlaylist(string title)
+  {
+    _repo.CreatePlaylist(title);
+  }
+
+  public void RemovePlaylist(int id)
+  {
+    _repo.RemovePlaylist(id);
+  }
+
+  public void AddMediaToPlaylist(int mediaID, int playlistID)
+  {
+    _repo.AddMediaToPlaylist(mediaID, playlistID);
+  }
+
+  public void RemoveMediaFromPlaylist(int mediaID, int playlistID)
+  {
+    _repo.RemoveMediaFromPlaylist(mediaID, playlistID);
+  }
 }

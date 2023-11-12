@@ -14,4 +14,14 @@ public interface IMediaPlayerRepo
   void RemoveMedia(int id);
   void UpdateAudio(int id, string title, string artist);
   void UpdateVideo(int id, string title);
+  void AddUser(string name);
+  void AddAdmin(string name);
+  void RemovePerson(int id);
+  void UpdatePerson(int id, string name);
+  void GetAllPlaylists();
+  void GetAllMediaInPlaylist(int id);
+  void CreatePlaylist(string title);
+  void RemovePlaylist(int id);
+  void AddMediaToPlaylist(int mediaID, int playlistID);
+  void RemoveMediaFromPlaylist(int mediaID, int playlistID);
 }
