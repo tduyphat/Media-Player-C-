@@ -1,8 +1,8 @@
-﻿using MediaPlayer.Controller.src;
+﻿namespace MediaPlayer.Framework.src;
+
+using MediaPlayer.Controller.src;
 using MediaPlayer.Framework.src.Repositories;
 using MediaPlayer.Service.src;
-
-namespace MediaPlayer.Framework.src;
 
 internal class Program
 {

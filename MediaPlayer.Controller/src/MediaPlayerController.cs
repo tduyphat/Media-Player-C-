@@ -52,7 +52,7 @@ public class MediaPlayerController
     }
     catch
     {
-      throw new ArgumentException("Title must be a string and duration must be an integer.");
+      throw new ArgumentException("Title must be a string, duration must be an integer and artist must be a string.");
     }
   }
 
@@ -80,6 +80,35 @@ public class MediaPlayerController
     catch
     {
       throw new ArgumentException("ID must be an integer.");
+    }
+  }
+
+  public void UpdateAudio(params object[] options)
+  {
+    try
+    {      
+      int.TryParse(options[0].ToString(), out int id);
+      string title = string.Format("{0}", options[1]);
+      string artist = string.Format("{0}", options[2]);
+      _mediaPlayerService.UpdateAudio(id, title, artist);
+    }
+    catch
+    {
+      throw new ArgumentException("ID must be an integer, title must be a string and artist must be a string.");
+    }
+  }
+
+  public void UpdateVideo(params object[] options)
+  {
+    try
+    {      
+      int.TryParse(options[0].ToString(), out int id);
+      string title = string.Format("{0}", options[1]);
+      _mediaPlayerService.UpdateVideo(id, title);
+    }
+    catch
+    {
+      throw new ArgumentException("ID must be an integer, title must be a string.");
     }
   }
 }

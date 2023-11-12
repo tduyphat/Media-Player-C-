@@ -1,8 +1,8 @@
+namespace MediaPlayer.Framework.src.Repositories;
+
 using MediaPlayer.Core.src.Abstractions;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
-
-namespace MediaPlayer.Framework.src.Repositories;
 
 public class MediaPlayerRepository : IMediaPlayerRepo
 {
@@ -85,13 +85,59 @@ public class MediaPlayerRepository : IMediaPlayerRepo
 
   public void RemoveMedia(int id)
   {
-    if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID))
+    if (_currentPerson is Admin)
     {
-      _mediaFiles.Remove(foundMediaWithID.ID);
+      if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID))
+      {
+        _mediaFiles.Remove(foundMediaWithID.ID);
+      }
+      else
+      {
+        Console.WriteLine("ID is not found.");
+      }
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      Console.WriteLine("You do not have the permission to remove media.");
+    }
+  }
+
+  public void UpdateAudio(int id, string title, string artist)
+  {
+    if (_currentPerson is Admin)
+    {
+      if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID) && foundMediaWithID is Audio audio)
+      {
+        audio.Title = title;
+        audio.Artist = artist;
+      }
+      else
+      {
+        Console.WriteLine("ID is not found.");
+      }
+    }
+    else
+    {
+      Console.WriteLine("You do not have the permission to update audio.");
+    }
+  }
+
+  public void UpdateVideo(int id, string title)
+  {
+    if (_currentPerson is Admin)
+    {
+      if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID) && foundMediaWithID is Video video)
+      {
+        video.Title = title;
+      }
+      else
+      {
+        Console.WriteLine("ID is not found.");
+      }
+    }
+    else
+    {
+      Console.WriteLine("You do not have the permission to update video.");
     }
   }
 }

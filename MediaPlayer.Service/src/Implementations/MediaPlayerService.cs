@@ -45,4 +45,14 @@ public class MediaPlayerService: IMediaPlayerService
   {
     _repo.RemoveMedia(id);
   }
+
+  public void UpdateAudio(int id, string title, string artist)
+  {
+    _repo.UpdateAudio(id, title, artist);
+  }
+
+  public void UpdateVideo(int id, string title)
+  {
+    _repo.UpdateVideo(id, title);
+  }
 }
