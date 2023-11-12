@@ -14,13 +14,35 @@ public class MediaPlayerService: IMediaPlayerService
     _repo = repo;
   }
 
-  public Dictionary<int, Media> GetAllMedia()
+  public void GetAllMedia()
   {
-    return _repo.GetAllMedia();
+    _repo.GetAllMedia();
   }
 
-  public Dictionary<int, Person> GetAllPeople()
+  public void GetAllPeople()
   {
-    return _repo.GetAllPeople();
+    _repo.GetAllPeople();
+  }
+
+  public void Login(int id)
+  {
+    _repo.Login(id);
+  }
+
+  public void Logout()
+  {
+    _repo.Logout();
+  }
+  public void AddAudio(string title, int duration, string artist)
+  {
+    _repo.AddAudio(title, duration, artist);
+  }
+  public void AddVideo(string title, int duration)
+  {
+    _repo.AddVideo(title, duration);
+  }
+  public void RemoveMedia(int id)
+  {
+    _repo.RemoveMedia(id);
   }
 }

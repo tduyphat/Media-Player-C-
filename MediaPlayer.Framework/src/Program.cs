@@ -11,8 +11,9 @@ internal class Program
         var database = new Database();
         var mediaPlayerRepo = new MediaPlayerRepository(database);
         var mediaPlayerService = new MediaPlayerService(mediaPlayerRepo);
-        var MediaPlayerController = new MediaPlayerController(mediaPlayerService);
-        var results = MediaPlayerController.GetAllMedia();
-        Console.WriteLine(results);
+        var mediaPlayerController = new MediaPlayerController(mediaPlayerService);
+        mediaPlayerController.AddAudio("yesterday", 300, "the beatles");
+        mediaPlayerController.AddVideo("i know", 300);
+        mediaPlayerController.GetAllMedia();
     }
 }

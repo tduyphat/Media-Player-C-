@@ -5,6 +5,11 @@ using MediaPlayer.Core.src.Entities.PersonEntities;
 
 public interface IMediaPlayerService
 {
-  Dictionary<int, Media> GetAllMedia();
-  Dictionary<int, Person> GetAllPeople();
+  void GetAllMedia();
+  void GetAllPeople();
+  void Login(int id);
+  void Logout();
+  void AddAudio(string title, int duration, string artist);
+  void AddVideo(string title, int duration);
+  void RemoveMedia(int id);
 }
