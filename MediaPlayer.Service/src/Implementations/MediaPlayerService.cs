@@ -14,16 +14,6 @@ public class MediaPlayerService: IMediaPlayerService
     _repo = repo;
   }
 
-  public void GetAllMedia()
-  {
-    _repo.GetAllMedia();
-  }
-
-  public void GetAllPeople()
-  {
-    _repo.GetAllPeople();
-  }
-
   public void Login(int id)
   {
     _repo.Login(id);
@@ -32,48 +22,6 @@ public class MediaPlayerService: IMediaPlayerService
   public void Logout()
   {
     _repo.Logout();
-  }
-  public void AddAudio(string title, int duration, string artist)
-  {
-    _repo.AddAudio(title, duration, artist);
-  }
-  public void AddVideo(string title, int duration)
-  {
-    _repo.AddVideo(title, duration);
-  }
-  public void RemoveMedia(int id)
-  {
-    _repo.RemoveMedia(id);
-  }
-
-  public void UpdateAudio(int id, string title, string artist)
-  {
-    _repo.UpdateAudio(id, title, artist);
-  }
-
-  public void UpdateVideo(int id, string title)
-  {
-    _repo.UpdateVideo(id, title);
-  }
-
-  public void AddUser(string name)
-  {
-    _repo.AddUser(name);
-  }
-
-  public void AddAdmin(string name)
-  {
-    _repo.AddUser(name);
-  }
-
-  public void RemovePerson(int id)
-  {
-    _repo.RemovePerson(id);
-  }
-
-  public void UpdatePerson(int id, string name)
-  {
-    _repo.UpdatePerson(id, name);
   }
 
   public void GetAllPlaylists()

@@ -10,10 +10,18 @@ internal class Program
     {
         var database = new Database();
         var mediaPlayerRepo = new MediaPlayerRepository(database);
+
         var mediaPlayerService = new MediaPlayerService(mediaPlayerRepo);
         var mediaPlayerController = new MediaPlayerController(mediaPlayerService);
-        mediaPlayerController.AddAudio("yesterday", 300, "the beatles");
-        mediaPlayerController.AddVideo("i know", 300);
-        mediaPlayerController.GetAllMedia();
+
+        var mediaFilesService = new MediaFilesService(mediaPlayerRepo);
+        var mediaFilesController = new MediaFilesController(mediaFilesService);
+
+        var peopleService = new PeopleService(mediaPlayerRepo);
+        var PeopleController = new PeopleController(peopleService);
+
+        mediaFilesController.AddAudio("yesterday", 300, "the beatles");
+        mediaFilesController.AddVideo("i know", 300);
+        mediaFilesController.GetAllMedia();
     }
 }

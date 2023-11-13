@@ -5,7 +5,7 @@ using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Core.src.Entities.PlaylistEntities;
 
-public class MediaPlayerRepository : IMediaPlayerRepo
+public class MediaPlayerRepository : IMediaPlayerRepo, IMediaFilesRepo, IPeopleRepo
 {
   private Dictionary<int, Media> _mediaFiles;
   private Dictionary<int, Person> _people;
