@@ -19,8 +19,13 @@ public class Database
   public Database()
   {
     _mediaFiles = new Dictionary<int, Media>();
-    _people = new Dictionary<int, Person>();
+    _people = new Dictionary<int, Person> { { 1, new Admin("admin") } };
     _currentPerson = null;
     _currentPlaylist = null;
+  }
+
+  public void PrintCurrentPerson()
+  {
+    Console.WriteLine(_currentPerson.Name);
   }
 }
