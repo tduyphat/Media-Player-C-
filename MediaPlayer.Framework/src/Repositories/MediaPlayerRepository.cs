@@ -16,8 +16,8 @@ public class MediaPlayerRepository : IMediaPlayerRepo
   {
     _mediaFiles = database.MediaFiles;
     _people = database.People;
-    _currentPerson = database.CurrentPerson;
-    _currentPlaylist = database.CurrentPlaylist;
+    _currentPerson = null;
+    _currentPlaylist = null;
   }
 
   public void Login(int id)

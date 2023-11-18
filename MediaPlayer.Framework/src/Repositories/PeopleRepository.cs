@@ -13,7 +13,7 @@ public class PeopleRepository : IPeopleRepo
   public PeopleRepository(Database database)
   {
     _people = database.People;
-    _currentPerson = database.CurrentPerson;
+    _currentPerson = null;
   }
 
   public void GetAllPeople()
@@ -30,65 +30,65 @@ public class PeopleRepository : IPeopleRepo
 
   public void AddUser(string name)
   {
-    if (_currentPerson is Admin)
-    {
-      User newUser = new(name);
-      _people.Add(newUser.ID, newUser);
-    }
-    else
-    {
-      Console.WriteLine("You do not have the permission to create new user.");
-    }
+    // if (_currentPerson is Admin)
+    // {
+    User newUser = new(name);
+    _people.Add(newUser.ID, newUser);
+    // }
+    // else
+    // {
+    //   Console.WriteLine("You do not have the permission to create new user.");
+    // }
   }
 
   public void AddAdmin(string name)
   {
-    if (_currentPerson is Admin)
-    {
-      Admin newAdmin = new(name);
-      _people.Add(newAdmin.ID, newAdmin);
-    }
-    else
-    {
-      Console.WriteLine("You do not have the permission to create new admin.");
-    }
+    // if (_currentPerson is Admin)
+    // {
+    Admin newAdmin = new(name);
+    _people.Add(newAdmin.ID, newAdmin);
+    // }
+    // else
+    // {
+    //   Console.WriteLine("You do not have the permission to create new admin.");
+    // }
   }
 
   public void RemovePerson(int id)
   {
-    if (_currentPerson is Admin)
+    // if (_currentPerson is Admin)
+    // {
+    if (_people.TryGetValue(id, out Person? foundPersonWithID))
     {
-      if (_people.TryGetValue(id, out Person? foundPersonWithID))
-      {
-        _people.Remove(foundPersonWithID.ID);
-      }
-      else
-      {
-        Console.WriteLine("ID is not found.");
-      }
+      _people.Remove(foundPersonWithID.ID);
     }
     else
     {
-      Console.WriteLine("You do not have the permission to remove people.");
+      Console.WriteLine("ID is not found.");
     }
+    // }
+    // else
+    // {
+    //   Console.WriteLine("You do not have the permission to remove people.");
+    // }
   }
 
   public void UpdatePerson(int id, string name)
   {
-    if (_currentPerson is Admin)
+    // if (_currentPerson is Admin)
+    // {
+    if (_people.TryGetValue(id, out Person? foundPersonWithID))
     {
-      if (_people.TryGetValue(id, out Person? foundPersonWithID))
-      {
-        foundPersonWithID.Name = name;
-      }
-      else
-      {
-        Console.WriteLine("ID is not found.");
-      }
+      foundPersonWithID.Name = name;
     }
     else
     {
-      Console.WriteLine("You do not have the permission to update people.");
+      Console.WriteLine("ID is not found.");
     }
+    // }
+    // // else
+    // // {
+    // //   Console.WriteLine("You do not have the permission to update people.");
+    // // }
   }
 }
