@@ -25,6 +25,7 @@ public class MediaPlayerRepository : IMediaPlayerRepo
     if (_people.TryGetValue(id, out Person? foundPersonWithId))
     {
       _currentPerson = foundPersonWithId;
+      Console.WriteLine($"{_currentPerson.Name} is logged in.");
     }
     else
     {

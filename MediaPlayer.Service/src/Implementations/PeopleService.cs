@@ -26,7 +26,7 @@ public class PeopleService: IPeopleService
 
   public void AddAdmin(string name)
   {
-    _repo.AddUser(name);
+    _repo.AddAdmin(name);
   }
 
   public void RemovePerson(int id)

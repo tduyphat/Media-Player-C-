@@ -8,7 +8,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var database = new Database();
+        var database = Database.Instance;
         var mediaFilesRepo = new MediaFilesRepository(database);
         var peopleRepository = new PeopleRepository(database);
         var mediaPlayerRepo = new MediaPlayerRepository(database);
@@ -20,12 +20,10 @@ internal class Program
         var mediaFilesController = new MediaFilesController(mediaFilesService);
 
         var peopleService = new PeopleService(peopleRepository);
-        var PeopleController = new PeopleController(peopleService);
+        var peopleController = new PeopleController(peopleService);
 
-        PeopleController.GetAllPeople();
+        peopleController.GetAllPeople();
         mediaPlayerController.Login(1);
-        database.PrintCurrentPerson();
-        PeopleController.AddUser("john");
         mediaFilesController.AddAudio("yesterday", 300, "the beatles");
         mediaFilesController.AddVideo("i know", 300);
         mediaFilesController.GetAllMedia();

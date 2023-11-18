@@ -16,16 +16,14 @@ public class Database
   public Person? CurrentPerson { get => _currentPerson; set => _currentPerson = value; }
   public Playlist? CurrentPlaylist { get => _currentPlaylist; set => _currentPlaylist = value; }
 
+  private static readonly Lazy<Database> lazyInstance = new Lazy<Database>(() => new Database());
+  public static Database Instance => lazyInstance.Value;
+
   public Database()
   {
     _mediaFiles = new Dictionary<int, Media>();
     _people = new Dictionary<int, Person> { { 1, new Admin("admin") } };
     _currentPerson = null;
     _currentPlaylist = null;
-  }
-
-  public void PrintCurrentPerson()
-  {
-    Console.WriteLine(_currentPerson.Name);
   }
 }
