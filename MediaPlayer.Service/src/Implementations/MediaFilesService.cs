@@ -29,7 +29,7 @@ public class MediaFilesService : IMediaFilesService
   {
     if (duration < 0)
     {
-      throw new ArgumentException("Duration should not be negative.");
+      return false;
     }
     else
     {
@@ -40,7 +40,7 @@ public class MediaFilesService : IMediaFilesService
   {
     if (duration < 0)
     {
-      throw new ArgumentException("Duration should not be negative.");
+      return false;
     }
     else
     {

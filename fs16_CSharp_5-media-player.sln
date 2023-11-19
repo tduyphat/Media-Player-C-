@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayer.Service", "Medi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayer.Framework", "MediaPlayer.FrameWork\MediaPlayer.Framework.csproj", "{5B75E3A0-26DF-43F7-945C-EFBABBD5225C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayer.Test", "MediaPlayer.Test\MediaPlayer.Test.csproj", "{E6ABB64C-F6C5-430A-92E1-E0C0F91FEA99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{5B75E3A0-26DF-43F7-945C-EFBABBD5225C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B75E3A0-26DF-43F7-945C-EFBABBD5225C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B75E3A0-26DF-43F7-945C-EFBABBD5225C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6ABB64C-F6C5-430A-92E1-E0C0F91FEA99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6ABB64C-F6C5-430A-92E1-E0C0F91FEA99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6ABB64C-F6C5-430A-92E1-E0C0F91FEA99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6ABB64C-F6C5-430A-92E1-E0C0F91FEA99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
