@@ -35,7 +35,7 @@ public class MediaPlayerServiceTest
   }
 
   [Theory]
-  [ClassData(typeof(GetAllMediaInPlaylistData))]
+  [ClassData(typeof(GetAllPlaylistsData))]
   public void GetAllPlaylists_NoParametersByDefault_ReturnValidData(List<PlaylistReadDTO> result)
   {
     // Arrange
