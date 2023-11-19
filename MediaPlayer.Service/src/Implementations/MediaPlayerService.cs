@@ -3,9 +3,11 @@
 using MediaPlayer.Core.src.Abstractions;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
+using MediaPlayer.Core.src.Entities.PlaylistEntities;
 using MediaPlayer.Service.src.Abstractions;
+using MediaPlayer.Service.src.DTO;
 
-public class MediaPlayerService: IMediaPlayerService
+public class MediaPlayerService : IMediaPlayerService
 {
   private IMediaPlayerRepo _repo;
 
@@ -14,43 +16,45 @@ public class MediaPlayerService: IMediaPlayerService
     _repo = repo;
   }
 
-  public void Login(int id)
+  public bool Login(int id)
   {
-    _repo.Login(id);
+    return _repo.Login(id);
   }
 
-  public void Logout()
+  public bool Logout()
   {
-    _repo.Logout();
+    return _repo.Logout();
   }
 
-  public void GetAllPlaylists()
+  public List<PlaylistReadDTO> GetAllPlaylists()
   {
-    _repo.GetAllPlaylists();
+    var allPlaylists = _repo.GetAllPlaylists();
+    return allPlaylists.Select((playlist) => new PlaylistReadDTO(playlist)).ToList();
   }
 
-  public void GetAllMediaInPlaylist(int id)
+  public List<MediaInPlaylistReadDTO> GetAllMediaInPlaylist(int id)
   {
-    _repo.GetAllMediaInPlaylist(id);
+    var allMediaInPlaylist = _repo.GetAllMediaInPlaylist(id);
+    return allMediaInPlaylist.Select((mediaInPlaylist) => new MediaInPlaylistReadDTO(mediaInPlaylist)).ToList();
   }
 
-  public void CreatePlaylist(string title)
+  public bool CreatePlaylist(string title)
   {
-    _repo.CreatePlaylist(title);
+    return _repo.CreatePlaylist(title);
   }
 
-  public void RemovePlaylist(int id)
+  public bool RemovePlaylist(int id)
   {
-    _repo.RemovePlaylist(id);
+    return _repo.RemovePlaylist(id);
   }
 
-  public void AddMediaToPlaylist(int mediaID, int playlistID)
+  public bool AddMediaToPlaylist(int mediaID, int playlistID)
   {
-    _repo.AddMediaToPlaylist(mediaID, playlistID);
+    return _repo.AddMediaToPlaylist(mediaID, playlistID);
   }
 
-  public void RemoveMediaFromPlaylist(int mediaID, int playlistID)
+  public bool RemoveMediaFromPlaylist(int mediaID, int playlistID)
   {
-    _repo.RemoveMediaFromPlaylist(mediaID, playlistID);
+    return _repo.RemoveMediaFromPlaylist(mediaID, playlistID);
   }
 }

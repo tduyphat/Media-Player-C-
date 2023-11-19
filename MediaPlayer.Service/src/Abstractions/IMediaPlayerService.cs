@@ -2,15 +2,16 @@ namespace MediaPlayer.Service.src.Abstractions;
 
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
+using MediaPlayer.Service.src.DTO;
 
 public interface IMediaPlayerService
 {
-  void Login(int id);
-  void Logout();
-  void GetAllPlaylists();
-  void GetAllMediaInPlaylist(int id);
-  void CreatePlaylist(string title);
-  void RemovePlaylist(int id);
-  void AddMediaToPlaylist(int mediaID, int playlistID);
-  void RemoveMediaFromPlaylist(int mediaID, int playlistID);
+  bool Login(int id);
+  bool Logout();
+  List<PlaylistReadDTO> GetAllPlaylists();
+  List<MediaInPlaylistReadDTO> GetAllMediaInPlaylist(int id);
+  bool CreatePlaylist(string title);
+  bool RemovePlaylist(int id);
+  bool AddMediaToPlaylist(int mediaID, int playlistID);
+  bool RemoveMediaFromPlaylist(int mediaID, int playlistID);
 }

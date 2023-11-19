@@ -3,6 +3,7 @@ namespace MediaPlayer.Controller.src;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Service.src.Abstractions;
+using MediaPlayer.Service.src.DTO;
 
 public class PeopleController
 {
@@ -13,43 +14,17 @@ public class PeopleController
     _peopleService = service;
   }
 
-  public void GetAllPeople()
+  public List<PersonReadDTO> GetAllPeople()
   {
-    _peopleService.GetAllPeople();
+    return _peopleService.GetAllPeople();
   }
 
-  public void AddUser(object option)
-  {
-    try
-    {
-      string name = string.Format("{0}", option);
-      _peopleService.AddUser(name);
-    }
-    catch
-    {
-      throw new ArgumentException("Name must be a string.");
-    }
-  }
-
-  public void AddAdmin(object option)
-  {
-    try
-    {
-      string name = string.Format("{0}", option);
-      _peopleService.AddAdmin(name);
-    }
-    catch
-    {
-      throw new ArgumentException("Name must be a string.");
-    }
-  }
-
-  public void RemovePerson(object option)
+  public PersonReadDTO GetPersonByID(object option)
   {
     try
     {
       int.TryParse(option.ToString(), out int id);
-      _peopleService.RemovePerson(id);
+      return _peopleService.GetPersonByID(id);
     }
     catch
     {
@@ -57,13 +32,52 @@ public class PeopleController
     }
   }
 
-  public void UpdatePerson(params object[] options)
+  public bool AddUser(object option)
+  {
+    try
+    {
+      string name = string.Format("{0}", option);
+      return _peopleService.AddUser(name);
+    }
+    catch
+    {
+      throw new ArgumentException("Name must be a string.");
+    }
+  }
+
+  public bool AddAdmin(object option)
+  {
+    try
+    {
+      string name = string.Format("{0}", option);
+      return _peopleService.AddAdmin(name);
+    }
+    catch
+    {
+      throw new ArgumentException("Name must be a string.");
+    }
+  }
+
+  public bool RemovePerson(object option)
+  {
+    try
+    {
+      int.TryParse(option.ToString(), out int id);
+      return _peopleService.RemovePerson(id);
+    }
+    catch
+    {
+      throw new ArgumentException("ID must be an integer.");
+    }
+  }
+
+  public bool UpdatePerson(params object[] options)
   {
     try
     {
       int.TryParse(options[0].ToString(), out int id);
       string name = string.Format("{0}", options[1]);
-      _peopleService.UpdatePerson(id, name);
+      return _peopleService.UpdatePerson(id, name);
     }
     catch
     {

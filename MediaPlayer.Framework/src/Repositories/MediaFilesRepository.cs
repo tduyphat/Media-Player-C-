@@ -16,24 +16,30 @@ public class MediaFilesRepository : IMediaFilesRepo
     // _currentPerson = null;
   }
 
-  public void GetAllMedia()
+  public List<Media> GetAllMedia()
   {
-    if (_mediaFiles.Count > 0)
+    return _mediaFiles.Values.ToList();
+  }
+
+  public Media GetMediaByID(int id)
+  {
+    if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID))
     {
-      Console.WriteLine("ALL MEDIA:");
-      foreach (var mediaFile in _mediaFiles.Values)
-      {
-        Console.WriteLine($"Media Title: {mediaFile.Title}, Duration: {mediaFile.Duration}s");
-      }
+      return foundMediaWithID;
+    }
+    else
+    {
+      throw new Exception("ID does not exist");
     }
   }
 
-  public void AddAudio(string title, int duration, string artist)
+  public bool AddAudio(string title, int duration, string artist)
   {
     // if (_currentPerson is Admin)
     // {
     Audio newAudio = new(title, duration, artist);
     _mediaFiles.Add(newAudio.ID, newAudio);
+    return true;
     // }
     // else
     // {
@@ -41,12 +47,13 @@ public class MediaFilesRepository : IMediaFilesRepo
     // }
   }
 
-  public void AddVideo(string title, int duration)
+  public bool AddVideo(string title, int duration)
   {
     // if (_currentPerson is Admin)
     // {
     Video newVideo = new(title, duration);
     _mediaFiles.Add(newVideo.ID, newVideo);
+    return true;
     // }
     // else
     // {
@@ -54,17 +61,18 @@ public class MediaFilesRepository : IMediaFilesRepo
     // }
   }
 
-  public void RemoveMedia(int id)
+  public bool RemoveMedia(int id)
   {
     // if (_currentPerson is Admin)
     // {
     if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID))
     {
       _mediaFiles.Remove(foundMediaWithID.ID);
+      return true;
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      return false;
     }
     // }
     // // else
@@ -73,7 +81,7 @@ public class MediaFilesRepository : IMediaFilesRepo
     // // }
   }
 
-  public void UpdateAudio(int id, string title, string artist)
+  public bool UpdateAudio(int id, string title, string artist)
   {
     // if (_currentPerson is Admin)
     // {
@@ -81,10 +89,11 @@ public class MediaFilesRepository : IMediaFilesRepo
     {
       audio.Title = title;
       audio.Artist = artist;
+      return true;
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      return false;
     }
     // }
     // else
@@ -93,17 +102,18 @@ public class MediaFilesRepository : IMediaFilesRepo
     // }
   }
 
-  public void UpdateVideo(int id, string title)
+  public bool UpdateVideo(int id, string title)
   {
     // if (_currentPerson is Admin)
     // {
     if (_mediaFiles.TryGetValue(id, out Media? foundMediaWithID) && foundMediaWithID is Video video)
     {
       video.Title = title;
+      return true;
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      return false;
     }
     // }
     // else

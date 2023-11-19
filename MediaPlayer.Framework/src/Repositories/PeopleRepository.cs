@@ -4,6 +4,7 @@ using MediaPlayer.Core.src.Abstractions;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Core.src.Entities.PlaylistEntities;
+using MediaPlayer.Service.src.DTO;
 
 public class PeopleRepository : IPeopleRepo
 {
@@ -16,24 +17,30 @@ public class PeopleRepository : IPeopleRepo
     _currentPerson = null;
   }
 
-  public void GetAllPeople()
+  public List<Person> GetAllPeople()
   {
-    if (_people.Count > 0)
+    return _people.Values.ToList();
+  }
+
+  public Person GetPersonByID(int id)
+  {
+    if (_people.TryGetValue(id, out Person? foundPersonWithID))
     {
-      Console.WriteLine("ALL PEOPLE:");
-      foreach (var person in _people.Values)
-      {
-        Console.WriteLine($"ID: {person.ID}, Person Name: {person.Name}");
-      }
+      return foundPersonWithID;
+    }
+    else
+    {
+      throw new Exception("ID does not exist");
     }
   }
 
-  public void AddUser(string name)
+  public bool AddUser(string name)
   {
     // if (_currentPerson is Admin)
     // {
     User newUser = new(name);
     _people.Add(newUser.ID, newUser);
+    return true;
     // }
     // else
     // {
@@ -41,12 +48,13 @@ public class PeopleRepository : IPeopleRepo
     // }
   }
 
-  public void AddAdmin(string name)
+  public bool AddAdmin(string name)
   {
     // if (_currentPerson is Admin)
     // {
     Admin newAdmin = new(name);
     _people.Add(newAdmin.ID, newAdmin);
+    return true;
     // }
     // else
     // {
@@ -54,17 +62,18 @@ public class PeopleRepository : IPeopleRepo
     // }
   }
 
-  public void RemovePerson(int id)
+  public bool RemovePerson(int id)
   {
     // if (_currentPerson is Admin)
     // {
     if (_people.TryGetValue(id, out Person? foundPersonWithID))
     {
       _people.Remove(foundPersonWithID.ID);
+      return true;
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      return false;
     }
     // }
     // else
@@ -73,17 +82,18 @@ public class PeopleRepository : IPeopleRepo
     // }
   }
 
-  public void UpdatePerson(int id, string name)
+  public bool UpdatePerson(int id, string name)
   {
     // if (_currentPerson is Admin)
     // {
     if (_people.TryGetValue(id, out Person? foundPersonWithID))
     {
       foundPersonWithID.Name = name;
+      return true;
     }
     else
     {
-      Console.WriteLine("ID is not found.");
+      return false;
     }
     // }
     // // else

@@ -22,10 +22,16 @@ internal class Program
         var peopleService = new PeopleService(peopleRepository);
         var peopleController = new PeopleController(peopleService);
 
-        peopleController.GetAllPeople();
-        mediaPlayerController.Login(1);
-        mediaFilesController.AddAudio("yesterday", 300, "the beatles");
-        mediaFilesController.AddVideo("i know", 300);
-        mediaFilesController.GetAllMedia();
+        var allPeople = peopleController.GetAllPeople();
+        var allMedia = mediaFilesController.GetAllMedia();
+
+        foreach (var person in allPeople)
+        {
+            Console.WriteLine($"Name: {person.Name}, ID: {person.ID}");
+        }
+        foreach (var media in allMedia)
+        {
+            Console.WriteLine($"Title: {media.Title}, ID: {media.ID}");
+        }
     }
 }

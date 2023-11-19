@@ -3,6 +3,7 @@
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Service.src.Abstractions;
+using MediaPlayer.Service.src.DTO;
 
 public class MediaPlayerController
 {
@@ -13,12 +14,12 @@ public class MediaPlayerController
     _mediaPlayerService = service;
   }
 
-  public void Login(object option)
+  public bool Login(object option)
   {
     try
     {
       int.TryParse(option.ToString(), out int id);
-      _mediaPlayerService.Login(id);
+      return _mediaPlayerService.Login(id);
     }
     catch
     {
@@ -26,22 +27,22 @@ public class MediaPlayerController
     }
   }
 
-  public void Logout()
+  public bool Logout()
   {
-    _mediaPlayerService.Logout();
+    return _mediaPlayerService.Logout();
   }
 
-  public void GetAllPlaylists()
+  public List<PlaylistReadDTO> GetAllPlaylists()
   {
-    _mediaPlayerService.GetAllPlaylists();
+    return _mediaPlayerService.GetAllPlaylists();
   }
 
-  public void GetAllMediaInPlaylist(object option)
+  public List<MediaInPlaylistReadDTO> GetAllMediaInPlaylist(object option)
   {
     try
     {
       int.TryParse(option.ToString(), out int id);
-      _mediaPlayerService.GetAllMediaInPlaylist(id);
+      return _mediaPlayerService.GetAllMediaInPlaylist(id);
     }
     catch
     {
@@ -49,12 +50,12 @@ public class MediaPlayerController
     }
   }
 
-  public void CreatePlaylist(object option)
+  public bool CreatePlaylist(object option)
   {
     try
     {
       string title = string.Format("{0}", option);
-      _mediaPlayerService.CreatePlaylist(title);
+      return _mediaPlayerService.CreatePlaylist(title);
     }
     catch
     {
@@ -62,12 +63,12 @@ public class MediaPlayerController
     }
   }
 
-  public void RemovePlaylist(object option)
+  public bool RemovePlaylist(object option)
   {
     try
     {
       int.TryParse(option.ToString(), out int id);
-      _mediaPlayerService.RemovePlaylist(id);
+      return _mediaPlayerService.RemovePlaylist(id);
     }
     catch
     {
@@ -75,13 +76,13 @@ public class MediaPlayerController
     }
   }
 
-  public void AddMediaToPlaylist(params object[] options)
+  public bool AddMediaToPlaylist(params object[] options)
   {
     try
     {
       int.TryParse(options[0].ToString(), out int mediaID);
       int.TryParse(options[1].ToString(), out int playlistID);
-      _mediaPlayerService.AddMediaToPlaylist(mediaID, playlistID);
+      return _mediaPlayerService.AddMediaToPlaylist(mediaID, playlistID);
     }
     catch
     {
@@ -89,13 +90,13 @@ public class MediaPlayerController
     }
   }
 
-  public void RemoveMediaFromPlaylist(params object[] options)
+  public bool RemoveMediaFromPlaylist(params object[] options)
   {
     try
     {
       int.TryParse(options[0].ToString(), out int mediaID);
       int.TryParse(options[1].ToString(), out int playlistID);
-      _mediaPlayerService.RemoveMediaFromPlaylist(mediaID, playlistID);
+      return _mediaPlayerService.RemoveMediaFromPlaylist(mediaID, playlistID);
     }
     catch
     {

@@ -4,6 +4,7 @@ using MediaPlayer.Core.src.Abstractions;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Service.src.Abstractions;
+using MediaPlayer.Service.src.DTO;
 
 public class PeopleService: IPeopleService
 {
@@ -14,28 +15,35 @@ public class PeopleService: IPeopleService
     _repo = repo;
   }
 
-  public void GetAllPeople()
+  public List<PersonReadDTO> GetAllPeople()
   {
-    _repo.GetAllPeople();
+    var allPeople = _repo.GetAllPeople();
+    return allPeople.Select((person) => new PersonReadDTO(person)).ToList();
   }
 
-  public void AddUser(string name)
+  public PersonReadDTO GetPersonByID(int id)
   {
-    _repo.AddUser(name);
+    var person = _repo.GetPersonByID(id);
+    return new PersonReadDTO(person);
   }
 
-  public void AddAdmin(string name)
+  public bool AddUser(string name)
   {
-    _repo.AddAdmin(name);
+    return _repo.AddUser(name);
   }
 
-  public void RemovePerson(int id)
+  public bool AddAdmin(string name)
   {
-    _repo.RemovePerson(id);
+    return _repo.AddAdmin(name);
   }
 
-  public void UpdatePerson(int id, string name)
+  public bool RemovePerson(int id)
   {
-    _repo.UpdatePerson(id, name);
+    return _repo.RemovePerson(id);
+  }
+
+  public bool UpdatePerson(int id, string name)
+  {
+    return _repo.UpdatePerson(id, name);
   }
 }

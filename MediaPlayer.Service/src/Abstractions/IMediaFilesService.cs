@@ -2,13 +2,15 @@ namespace MediaPlayer.Service.src.Abstractions;
 
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
+using MediaPlayer.Service.src.DTO;
 
 public interface IMediaFilesService
 {
-  void GetAllMedia();
-  void AddAudio(string title, int duration, string artist);
-  void AddVideo(string title, int duration);
-  void RemoveMedia(int id);
-  void UpdateAudio(int id, string title, string artist);
-  void UpdateVideo(int id, string title);
+  List<MediaReadDTO> GetAllMedia();
+  MediaReadDTO GetMediaByID(int id);
+  bool AddAudio(string title, int duration, string artist);
+  bool AddVideo(string title, int duration);
+  bool RemoveMedia(int id);
+  bool UpdateAudio(int id, string title, string artist);
+  bool UpdateVideo(int id, string title);
 }

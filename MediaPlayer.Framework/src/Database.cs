@@ -16,7 +16,18 @@ public class Database
 
   public Database()
   {
-    _mediaFiles = new Dictionary<int, Media>();
-    _people = new Dictionary<int, Person> { { 1, new Admin("admin") } };
+    _mediaFiles = new Dictionary<int, Media>
+    {
+      {1, new Audio("sandstorm", 300, "darude")},
+      {2, new Audio("dywc", 400, "shm")},
+      {3, new Video("se7en", 700)},
+      {4, new Video("gta6trailer", 600)},
+    };
+    _people = new Dictionary<int, Person>
+    {
+      { 1, new Admin("admin1") },
+      { 2, new User("user1") },
+      { 3, new User("user3") },
+    };
   }
 }

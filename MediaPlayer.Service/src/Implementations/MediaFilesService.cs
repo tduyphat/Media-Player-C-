@@ -4,8 +4,9 @@ using MediaPlayer.Core.src.Abstractions;
 using MediaPlayer.Core.src.Entities.MediaEntities;
 using MediaPlayer.Core.src.Entities.PersonEntities;
 using MediaPlayer.Service.src.Abstractions;
+using MediaPlayer.Service.src.DTO;
 
-public class MediaFilesService: IMediaFilesService
+public class MediaFilesService : IMediaFilesService
 {
   private IMediaFilesRepo _repo;
 
@@ -14,30 +15,50 @@ public class MediaFilesService: IMediaFilesService
     _repo = repo;
   }
 
-  public void GetAllMedia()
+  public List<MediaReadDTO> GetAllMedia()
   {
-    _repo.GetAllMedia();
+    var allMedia = _repo.GetAllMedia();
+    return allMedia.Select(media => new MediaReadDTO(media)).ToList();
   }
-  public void AddAudio(string title, int duration, string artist)
+  public MediaReadDTO GetMediaByID(int id)
   {
-    _repo.AddAudio(title, duration, artist);
+    var media = _repo.GetMediaByID(id);
+    return new MediaReadDTO(media);
   }
-  public void AddVideo(string title, int duration)
+  public bool AddAudio(string title, int duration, string artist)
   {
-    _repo.AddVideo(title, duration);
+    if (duration < 0)
+    {
+      throw new ArgumentException("Duration should not be negative.");
+    }
+    else
+    {
+      return _repo.AddAudio(title, duration, artist);
+    }
   }
-  public void RemoveMedia(int id)
+  public bool AddVideo(string title, int duration)
   {
-    _repo.RemoveMedia(id);
+    if (duration < 0)
+    {
+      throw new ArgumentException("Duration should not be negative.");
+    }
+    else
+    {
+      return _repo.AddVideo(title, duration);
+    }
+  }
+  public bool RemoveMedia(int id)
+  {
+    return _repo.RemoveMedia(id);
   }
 
-  public void UpdateAudio(int id, string title, string artist)
+  public bool UpdateAudio(int id, string title, string artist)
   {
-    _repo.UpdateAudio(id, title, artist);
+    return _repo.UpdateAudio(id, title, artist);
   }
 
-  public void UpdateVideo(int id, string title)
+  public bool UpdateVideo(int id, string title)
   {
-    _repo.UpdateVideo(id, title);
+    return _repo.UpdateVideo(id, title);
   }
 }

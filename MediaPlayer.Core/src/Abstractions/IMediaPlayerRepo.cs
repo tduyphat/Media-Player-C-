@@ -1,13 +1,16 @@
+using MediaPlayer.Core.src.Entities.PlaylistEntities;
+
 namespace MediaPlayer.Core.src.Abstractions;
 
 public interface IMediaPlayerRepo
 {
-  void Login(int id);
-  void Logout();
-  void GetAllPlaylists();
-  void GetAllMediaInPlaylist(int id);
-  void CreatePlaylist(string title);
-  void RemovePlaylist(int id);
-  void AddMediaToPlaylist(int mediaID, int playlistID);
-  void RemoveMediaFromPlaylist(int mediaID, int playlistID);
+  bool Login(int id);
+  bool Logout();
+  List<Playlist> GetAllPlaylists();
+  Playlist GetPlaylistByID(int id);
+  List<MediaInPlaylist> GetAllMediaInPlaylist(int id);
+  bool CreatePlaylist(string title);
+  bool RemovePlaylist(int id);
+  bool AddMediaToPlaylist(int mediaID, int playlistID);
+  bool RemoveMediaFromPlaylist(int mediaID, int playlistID);
 }

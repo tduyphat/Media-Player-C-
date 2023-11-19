@@ -20,99 +20,112 @@ public class MediaPlayerRepository : IMediaPlayerRepo
     _currentPlaylist = null;
   }
 
-  public void Login(int id)
+  public bool Login(int id)
   {
     if (_people.TryGetValue(id, out Person? foundPersonWithId))
     {
       _currentPerson = foundPersonWithId;
-      Console.WriteLine($"{_currentPerson.Name} is logged in.");
+      return true;
     }
     else
     {
-      Console.WriteLine("No user with this ID exists.");
+      return false;
     }
   }
 
-  public void Logout()
+  public bool Logout()
   {
     if (_currentPerson is null)
     {
-      Console.WriteLine("No user is logged in.");
+      return false;
     }
     else
     {
       _currentPerson = null;
       _currentPlaylist = null;
+      return true;
     }
   }
 
-  public void GetAllPlaylists()
+  public List<Playlist> GetAllPlaylists()
   {
     if (_currentPerson is User user)
     {
-      if (user.Playlists.Count > 0)
-      {
-        Console.WriteLine($"{user.Name}'s PLAYLISTS:");
-        foreach (var playlist in user.Playlists.Values)
-        {
-          Console.WriteLine($"Playlist Title: {playlist.Title}, Media: {playlist.MediaFiles.Count} tracks");
-        }
-      }
+      return user.Playlists.Values.ToList();
     }
     else
     {
-      Console.WriteLine("You have to logged in as user to get all playlists.");
+      throw new Exception("You have to logged in as user to get all the playlists.");
     }
   }
 
-  public void GetAllMediaInPlaylist(int id)
+  public Playlist GetPlaylistByID(int id)
   {
     if (_currentPerson is User user)
     {
       if (user.Playlists.TryGetValue(id, out Playlist? foundPlaylistWithID))
       {
-        Console.WriteLine($"MEDIA IN {foundPlaylistWithID.Title}");
-        foreach (var media in foundPlaylistWithID.MediaFiles.Values)
-        {
-          Console.WriteLine($"Media Title: {media.Title}, Duration: {media.Duration}s");
-        }
+        return foundPlaylistWithID;
+      }
+      else
+      {
+        throw new Exception("Playlist ID does not exist");
       }
     }
     else
     {
-      Console.WriteLine("You have to logged in as user to read the playlist.");
+      throw new Exception("You have to logged in as user to read the playlist.");
     }
   }
 
-  public void CreatePlaylist(string title)
+  public List<MediaInPlaylist> GetAllMediaInPlaylist(int id)
+  {
+    var foundPlaylistWithID = GetPlaylistByID(id);
+    if (foundPlaylistWithID is not null)
+    {
+      return foundPlaylistWithID.MediaFiles.Values.ToList();
+    }
+    else
+    {
+      throw new Exception("Can't get media in playlist.");
+    }
+  }
+
+  public bool CreatePlaylist(string title)
   {
     if (_currentPerson is User user)
     {
       Playlist newPlaylist = new(title);
       user.Playlists.Add(newPlaylist.ID, newPlaylist);
+      return true;
     }
     else
     {
-      Console.WriteLine("You have to logged in as user to create new playlist.");
+      return false;
     }
   }
 
-  public void RemovePlaylist(int id)
+  public bool RemovePlaylist(int id)
   {
     if (_currentPerson is User user)
     {
       if (user.Playlists.TryGetValue(id, out Playlist? foundPlaylistWithID))
       {
         user.Playlists.Remove(foundPlaylistWithID.ID);
+        return true;
+      }
+      else
+      {
+        return false;
       }
     }
     else
     {
-      Console.WriteLine("You have to logged in as user to delete playlist.");
+      return false;
     }
   }
 
-  public void AddMediaToPlaylist(int mediaID, int playlistID)
+  public bool AddMediaToPlaylist(int mediaID, int playlistID)
   {
     if (_currentPerson is User user)
     {
@@ -122,40 +135,49 @@ public class MediaPlayerRepository : IMediaPlayerRepo
         {
           AudioInPlaylist newAudioInPlaylist = new(foundAudioWithID.Title, foundAudioWithID.Duration, foundAudioWithID.Artist);
           foundPlaylistWithID.MediaFiles.Add(newAudioInPlaylist.ID, newAudioInPlaylist);
+          return true;
         }
         if (foundMediaWithID is Video foundVideoWithID)
         {
           VideoInPlaylist newVideoInPlaylist = new(foundVideoWithID.Title, foundVideoWithID.Duration);
           foundPlaylistWithID.MediaFiles.Add(newVideoInPlaylist.ID, newVideoInPlaylist);
+          return false;
+        }
+        else
+        {
+          return false;
         }
       }
       else
       {
         Console.WriteLine("Playlist or media does not exist.");
+        return false;
       }
     }
     else
     {
       Console.WriteLine("You have to logged in as user to delete playlist.");
+      return false;
     }
   }
 
-  public void RemoveMediaFromPlaylist(int mediaID, int playlistID)
+  public bool RemoveMediaFromPlaylist(int mediaID, int playlistID)
   {
     if (_currentPerson is User user)
     {
       if (user.Playlists.TryGetValue(playlistID, out Playlist? foundPlaylistWithID) && foundPlaylistWithID.MediaFiles.TryGetValue(mediaID, out MediaInPlaylist? foundMediaInPlayListWithID))
       {
         foundPlaylistWithID.MediaFiles.Remove(foundMediaInPlayListWithID.ID);
+        return true;
       }
       else
       {
-        Console.WriteLine("Playlist or media does not exist.");
+        return false;
       }
     }
     else
     {
-      Console.WriteLine("You have to logged in as user to delete playlist.");
+      return false;
     }
   }
 }
