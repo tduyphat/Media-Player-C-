@@ -12,4 +12,9 @@ public class PersonReadDTO
     Name = person.Name;
     ID = person.ID;
   }
+
+  public override string ToString()
+  {
+    return $"Title: {Name}, ID: {ID}";
+  }
 }

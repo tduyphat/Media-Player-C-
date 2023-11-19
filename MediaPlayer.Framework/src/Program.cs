@@ -24,14 +24,16 @@ internal class Program
 
         var allPeople = peopleController.GetAllPeople();
         var allMedia = mediaFilesController.GetAllMedia();
+        var audio1 = mediaFilesController.GetMediaByID(1);
 
         foreach (var person in allPeople)
         {
-            Console.WriteLine($"Name: {person.Name}, ID: {person.ID}");
+            Console.WriteLine(person);
         }
         foreach (var media in allMedia)
         {
-            Console.WriteLine($"Title: {media.Title}, ID: {media.ID}");
+            Console.WriteLine(media);
         }
+        Console.WriteLine(audio1);
     }
 }

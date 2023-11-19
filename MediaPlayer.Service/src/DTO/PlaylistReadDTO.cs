@@ -12,4 +12,9 @@ public class PlaylistReadDTO
     Title = playlist.Title;
     ID = playlist.ID;
   }
+
+  public override string ToString()
+  {
+    return $"Title: {Title}, ID: {ID}";
+  }
 }

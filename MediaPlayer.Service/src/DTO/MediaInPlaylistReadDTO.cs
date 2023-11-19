@@ -12,4 +12,9 @@ public class MediaInPlaylistReadDTO
     Title = mediaInPlaylist.Title;
     ID = mediaInPlaylist.ID;
   }
+
+  public override string ToString()
+  {
+    return $"Title: {Title}, ID: {ID}";
+  }
 }

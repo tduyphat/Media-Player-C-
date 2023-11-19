@@ -12,4 +12,9 @@ public class MediaReadDTO
     Title = media.Title;
     ID = media.ID;
   }
+
+  public override string ToString()
+  {
+    return $"Title: {Title}, ID: {ID}";
+  }
 }
